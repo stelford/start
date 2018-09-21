@@ -10,7 +10,7 @@ class Request {
 
   bool accepts(String type) =>
       _request.headers[HttpHeaders.ACCEPT]
-          .where((name) => name.split(',').indexOf(type))
+          .where((name) => name.split(',').indexOf(type) >= 0)
           .length > 0;
 
   bool isMime(String type, {loose: false}) =>
@@ -51,7 +51,7 @@ class Request {
     return null;
   }
 
-  Future<Map> payload({ Encoding enc: UTF8 }) {
+  Future<Map> payload({ Encoding enc: utf8 }) {
     var completer = new Completer();
 
     if (isMime('application/x-www-form-urlencoded')) {
@@ -87,7 +87,7 @@ class Request {
     } else if (isMime('application/json', loose: true)) {
       _request.transform(const Utf8Decoder())
           .listen((content) {
-            final payload = JSON.decode(content);
+            final payload = json.decode(content);
             completer.complete(payload);
           });
     }
