@@ -104,7 +104,7 @@ class Response {
 
   Future json(data) {
     if (data is Map || data is List) {
-      data = JSON.encode(data);
+      data = json.encode(data);
     }
 
     if (get('Content-Type') == null) {
@@ -116,7 +116,7 @@ class Response {
 
   Future jsonp(String name, data) {
     if (data is Map) {
-      data = JSON.encode(data);
+      data = json.encode(data);
     }
     return send("$name('$data');");
   }
