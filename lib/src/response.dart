@@ -102,7 +102,7 @@ class Response {
     return _response.close();
   }
 
-  Future json(data) {
+  Future addjson(data) {
     if (data is Map || data is List) {
       data = json.encode(data);
     }
@@ -114,7 +114,7 @@ class Response {
     return send(data);
   }
 
-  Future jsonp(String name, data) {
+  Future addjsonp(String name, data) {
     if (data is Map) {
       data = json.encode(data);
     }
